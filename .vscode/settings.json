@@ -1,0 +1,9 @@
+{
+    "eslint.nodeEnv": "",
+    "eslint.notebooks.rules.customizations": [
+    
+    ],
+    "eslint.options": {
+    
+    }
+}

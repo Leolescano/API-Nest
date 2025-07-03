@@ -1,0 +1,41 @@
+// Archivo de esquema de Prisma
+// Define los modelos y enums de la base de datos
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+// Generador del cliente Prisma
+// Este bloque indica que se generará el cliente para JS/TS
+generator client {
+  provider = "prisma-client-js"
+  // output   = "../generated/prisma"
+}
+
+// Fuente de datos: conexión a la base de datos
+// Aquí se configura el proveedor y la URL de conexión
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Modelo de usuario
+model User {
+  id             String @id @default(uuid()) // ID único generado automáticamente
+  email          String @unique              // Email único
+  telephone      String?                     // Teléfono opcional
+  firstName      String                      // Nombre
+  lastName       String?                     // Apellido opcional
+  password       String                      // Contraseña
+  role           Role @default(USER)         // Rol del usuario (enum)
+  createdAt      DateTime @default(now())    // Fecha de creación
+  updatedAt      DateTime @updatedAt         // Fecha de actualización
+  address        String?                     // Dirección opcional             // Relación con membresías de organizaciones
+}
+
+// Enum para roles de usuario
+enum Role {
+  USER
+  ADMIN
+}
+
